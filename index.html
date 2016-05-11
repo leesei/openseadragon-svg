@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>OpenSeadragon + Snap.svg</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+
+        <style type="text/css">
+            html,
+            body,
+            #openseadragon {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+            }
+            .border {
+                border:thin solid red;
+            }
+
+            #openseadragon {
+                width: 800px;
+                height: 600px;
+            }
+        </style>
+    </head>
+    <body>
+      <div>
+        <button onclick="editOverlay()">Edit Overlay</button>
+        <input type="range" min="0" max="360" value="0" step="5" action="rotate"></input>
+      </div>
+      <div id="toolbar">
+        <button class="fa fa-mouse-pointer" aria-hidden="true" action="select"></button>
+        <button class="fa fa-square-o" aria-hidden="true" action="square"></button>
+        <button class="fa fa-circle-thin" aria-hidden="true" action="circle"></button>
+        <button class="fa fa-pencil-square-o" aria-hidden="true" action="freedraw"></button>
+        <button class="fa fa-font" aria-hidden="true" action="text"></button>
+        <button class="fa fa-trash-o" aria-hidden="true" action="delete"></button>
+      </div>
+      <div id="openseadragon"></div>
+
+      <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script src="openseadragon/openseadragon.js"></script>
+      <script src="openseadragon/openseadragon-svg-overlay2.js"></script>
+      <script src="snap.svg.js"></script>
+      <script src="script.js"></script>
+    </body>
+</html>
