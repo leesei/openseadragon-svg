@@ -44,7 +44,14 @@ window.viewer = OpenSeadragon({
   showNavigationControl: false,
   showNavigator: true
 });
-// viewer.activateImagingHelper();
+
+$zoomlevel = $('#zoomlevel');
+function getZoomPercent (viewer) {
+  return (viewer.viewport.viewportToImageZoom(viewer.viewport.getZoom(false))*100).toFixed(1) + '%';
+}
+viewer.addHandler('animation', function () {
+  $zoomlevel.text(getZoomPercent(viewer));
+});
 
 // initialize overlay
 viewer.addHandler('open', function () {
