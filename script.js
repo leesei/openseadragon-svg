@@ -4,53 +4,44 @@ function editOverlay() {
   overlayEditMode = !overlayEditMode;
 }
 
-$('input').on('keyup change', function() {
-  var action = this.getAttribute('action');
-  if (action === 'rotate') {
-    console.log('rotate', this.value);
+$("input").on("keyup change", function () {
+  var action = this.getAttribute("action");
+  if (action === "rotate") {
+    console.log("rotate", this.value);
     viewer.viewport.setRotation(Number(this.value));
   }
 });
 
-var tileSource = {
-  Image: {
-    "Format": "jpeg",
-    "Overlap": 1,
-    "Size": {
-      "Height": 30462,
-      "Width": 78000
-    },
-    "TileSize": 512,
-    "Url": "http://demo.openslide.org/aperio/cmu-2/slide_files/",
-    "xmlns": "http://schemas.microsoft.com/deepzoom/2008"
-  }
-};
+var tileSource =
+  "https://openseadragon.github.io/example-images/highsmith/highsmith.dzi";
 
 window.viewer = OpenSeadragon({
   id: "openseadragon",
   maxZoomPixelRatio: 10,
-  tileSources: [{
-    tileSource: tileSource
-  }],
+  tileSources: [
+    {
+      tileSource: tileSource,
+    },
+  ],
   // tileSources: "http://openseadragon.github.io/example-images/duomo.dzi"
   gestureSettingsMouse: {
     clickToZoom: false,
-    dblClickToZoom: false
+    dblClickToZoom: false,
   },
   gestureSettingsTouch: {
     clickToZoom: false,
-    dblClickToZoom: false
+    dblClickToZoom: false,
   },
   showNavigationControl: false,
-  showNavigator: true
+  showNavigator: true,
 });
 // viewer.activateImagingHelper();
 
 // initialize overlay
-viewer.addHandler('open', function () {
+viewer.addHandler("open", function () {
   var dimensions = viewer.source.dimensions;
   window.dimensions = dimensions;
-  window.dimensions.max = Math.max(dimensions.x, dimensions.y)
+  window.dimensions.max = Math.max(dimensions.x, dimensions.y);
 
   window.overlay = viewer.svgOverlay();
   window.paper = Snap(overlay.node());
@@ -59,23 +50,27 @@ viewer.addHandler('open', function () {
   elt.className = "border";
   viewer.addOverlay({
     element: elt,
-    location: viewer.viewport.imageToViewportRectangle(new OpenSeadragon.Rect(0, 0, dimensions.x, dimensions.y))
+    location: viewer.viewport.imageToViewportRectangle(
+      new OpenSeadragon.Rect(0, 0, dimensions.x, dimensions.y)
+    ),
   });
 
   addShapes();
 });
 
-function addShapes () {
+function addShapes() {
   window.shapes = [];
 
   // text draws upwards
-  shapes.push(paper.text(0, 3000, "Snap.svg").attr({
-    stroke: "#000",
-    fontSize: 3000,
-  }));
+  shapes.push(
+    paper.text(0, 500, "Snap.svg").attr({
+      stroke: "#000",
+      fontSize: 500,
+    })
+  );
 
   shapes.map(function (shape) {
     var bb = shape.getBBox();
-    var clientrect = shape.node.getBoundingClientRect()
-  })
+    var clientrect = shape.node.getBoundingClientRect();
+  });
 }
